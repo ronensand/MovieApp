@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
         mAdapter = new MovieEntriesAdapter(this, new ArrayList<MovieEntry>());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -73,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             context = parent.getContext();
             View itemView = inflater.inflate(R.layout.movie_item, parent, false);
+
             ImageViewHolder holder = new ImageViewHolder(itemView);
             holder.imageView = (ImageView)itemView.findViewById(R.id.grid_image_view);
-
             return holder;
         }
 
@@ -96,7 +95,13 @@ public class MainActivity extends AppCompatActivity {
                 mMovies.addAll(movies);
                 notifyDataSetChanged();
             }
+        }
 
+        public void appendMovies(List<MovieEntry> movies) {
+            if (null != movies) {
+                mMovies.addAll(movies);
+                notifyDataSetChanged();
+            }
         }
 
         public static class ImageViewHolder extends RecyclerView.ViewHolder {
